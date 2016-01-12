@@ -16,12 +16,28 @@
 @end
 
 @implementation ViewController
+- (IBAction)onBackButtonPressed:(id)sender {
+    [self.variableWebView goBack];
+}
+- (IBAction)onForwardButtonPressed:(id)sender {
+    [self.variableWebView goForward];
+}
+- (IBAction)onStopLoadingButtonPressed:(id)sender {
+    [self.variableWebView stopLoading];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self loadGivenURL:@"http://www.google.com"];
     
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    [self loadGivenURL:self.urlTextField.text];
+    
+    return true;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
@@ -34,14 +50,6 @@
     
     [self.spinner stopAnimating];
     
-}
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    
-    [self loadGivenURL:self.urlTextField.text];
-    
-    return TRUE;
 }
 
 -(void)loadGivenURL:(NSString *)givenURL {
